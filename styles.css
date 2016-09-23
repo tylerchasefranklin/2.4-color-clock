@@ -1,0 +1,12 @@
+body {
+  background-color: limegreen;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 30px;
+  font-family: fantasy;
+}
+
+.hours::after, .minutes::after {
+  content: ":";
+  padding: 20px;
+}
