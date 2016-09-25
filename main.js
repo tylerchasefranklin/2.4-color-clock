@@ -6,6 +6,9 @@
 var hoursHTMLElement = document.querySelector('.hours');
 var minutesHTMLElement = document.querySelector('.minutes');
 var secondsHTMLElement = document.querySelector('.seconds');
+var timebarHTMLElement = document.querySelector('.timebar');
+var backgroundHTMLElement = document.querySelector('.time-and-hex')
+
 
 //this is declaring the variable that we will call later into our function that updates the time
 var currentTime;
@@ -20,12 +23,31 @@ function updateClock(){
   hoursHTMLElement.textContent = ('0' + currentTime.getHours()).slice(-2);
   minutesHTMLElement.textContent = ('0' + currentTime.getMinutes()).slice(-2);
   secondsHTMLElement.textContent = ('0' + currentTime.getSeconds()).slice(-2);
+  updateTimebar();
   //
 }
 //this is setting the interval at which the clock will update (10 times a second so there is not a second delay before the clock starts) and then displaying the information on the webpage
 window.setInterval(updateClock, 100);
+window.setInterval(hexConversion, 1000);
 //
 
+function updateTimebar(){
+
+//this is telling javascript where to find the container, then we are grabbing the seconds from currentTime, dividing the second by the number of seconds in a minute and then multiplyig by 100 to get a percentage
+  timebarHTMLElement.style.width = (currentTime.getSeconds()/60 * 100)+ '%';
+
+}
+
+
+function hexConversion(){
+  var hexStringHours = ("0" + currentTime.getHours()).slice(-2).toString(16);
+  var hexStringMinutes = ("0" + currentTime.getMinutes()).slice(-2).toString(16);
+  var hexStringSeconds = ("0" + currentTime.getSeconds()).slice(-2).toString(16);
+  var updateColors = "#" + hexStringHours + hexStringMinutes + hexStringSeconds;
+  backgroundHTMLElement.style.backgroundColor = updateColors;
+
+  console.log(updateColors);
+}
 
 
 }());

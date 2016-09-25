@@ -6,7 +6,36 @@ body {
   font-family: fantasy;
 }
 
+
+
+h1, .container {
+  width: 700px;
+  margin: auto;
+
+}
+
+.time-and-hex {
+  width: 600px;
+  height: 400px;
+  vertical-align: middle;
+  display: inline-block;
+  margin-top: 50px;
+  padding-top: 150px;
+}
+
 .hours::after, .minutes::after {
   content: ":";
-  padding: 20px;
+}
+
+.timebar-container {
+  width: 600px;
+}
+
+.timebar {
+  width: 0;
+  height: 3px;
+  background-color: white;
+  margin:auto;
+
+
 }
