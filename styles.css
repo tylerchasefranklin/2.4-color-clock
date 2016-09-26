@@ -23,6 +23,12 @@ h1, .container {
   padding-top: 150px;
 }
 
+.time {
+  width: 200px;
+  margin: 20px auto;
+}
+
+
 .hours::after, .minutes::after {
   content: ":";
 }

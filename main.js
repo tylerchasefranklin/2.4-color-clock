@@ -7,8 +7,8 @@ var hoursHTMLElement = document.querySelector('.hours');
 var minutesHTMLElement = document.querySelector('.minutes');
 var secondsHTMLElement = document.querySelector('.seconds');
 var timebarHTMLElement = document.querySelector('.timebar');
-var backgroundHTMLElement = document.querySelector('.time-and-hex')
-
+var backgroundHTMLElement = document.querySelector('.time-and-hex');
+var timeHTMLElement = document.querySelector('.time');
 
 //this is declaring the variable that we will call later into our function that updates the time
 var currentTime;
@@ -28,7 +28,7 @@ function updateClock(){
 }
 //this is setting the interval at which the clock will update (10 times a second so there is not a second delay before the clock starts) and then displaying the information on the webpage
 window.setInterval(updateClock, 100);
-window.setInterval(hexConversion, 1000);
+window.setInterval(hexConversion, 100);
 //
 
 function updateTimebar(){
@@ -43,11 +43,11 @@ function hexConversion(){
   var hexStringHours = ("0" + currentTime.getHours()).slice(-2).toString(16);
   var hexStringMinutes = ("0" + currentTime.getMinutes()).slice(-2).toString(16);
   var hexStringSeconds = ("0" + currentTime.getSeconds()).slice(-2).toString(16);
-  var updateColors = "#" + hexStringHours + hexStringMinutes + hexStringSeconds;
+  var updateColors = ("#" + hexStringHours + hexStringMinutes + hexStringSeconds);
   backgroundHTMLElement.style.backgroundColor = updateColors;
-
-  console.log(updateColors);
+  timeHTMLElement.addEventListener("mouseover", hexConversion);
 }
+
 
 
 }());
