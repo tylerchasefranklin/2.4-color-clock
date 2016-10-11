@@ -2,52 +2,60 @@
   "use strict";
 
 //this is telling javascript where in the HTML the elements are and where to plug the information back in
-
+var clock = document.getElementById('clock');
+var background = document.querySelector('.container');
 var hoursHTMLElement = document.querySelector('.hours');
 var minutesHTMLElement = document.querySelector('.minutes');
 var secondsHTMLElement = document.querySelector('.seconds');
-var timebarHTMLElement = document.querySelector('.timebar');
-var backgroundHTMLElement = document.querySelector('.time-and-hex');
-var timeHTMLElement = document.querySelector('.time');
-
-//this is declaring the variable that we will call later into our function that updates the time
-var currentTime;
+var isHovering = false;
+var progressBar = document.getElementById('progress');
 
 
 
 function updateClock(){
   //this is telling the function where to pull the information for the date
-  currentTime = new Date();
-  //
-  //this is telling javascript where to get the hours, minutes, and seconds, adding a "0" in front of everything and then only taking the last two numbers
-  hoursHTMLElement.textContent = ('0' + currentTime.getHours()).slice(-2);
-  minutesHTMLElement.textContent = ('0' + currentTime.getMinutes()).slice(-2);
-  secondsHTMLElement.textContent = ('0' + currentTime.getSeconds()).slice(-2);
-  updateTimebar();
-  //
+  var currentTime = new Date();
+  var currentHours = currentTime.getHours();
+  var currentMinutes = currentTime.getMinutes();
+  var currentSeconds = currentTime.getSeconds();
+
+
+  var hexStringHours = ('0' + currentHours.toString(16)).slice(-2);
+  var hexStringMinutes = ('0' + currentMinutes.toString(16)).slice(-2);
+  var hexStringSeconds = ('0' + currentSeconds.toString(16)).slice(-2);
+  var updateColors = '#' + hexStringHours + hexStringMinutes + hexStringSeconds;
+  background.style.backgroundColor = updateColors;
+  background.style.borderColor = '#' + hexStringSeconds + 1;
+  hoursHTMLElement.style.color = '#' + hexStringHours + 'A';
+  minutesHTMLElement.style.color = '#' + hexStringMinutes + 'B';
+  secondsHTMLElement.style.color = '#' + hexStringSeconds + '1';
+
+  if (isHovering){
+    hoursHTMLElement.textContent = hexStringHours;
+    minutesHTMLElement.textContent = hexStringMinutes;
+    secondsHTMLElement.textContent = hexStringSeconds;
+
+  }else {
+  hoursHTMLElement.textContent = ('0' + currentHours).slice(-2);
+  minutesHTMLElement.textContent = ('0' + currentMinutes).slice(-2);
+  secondsHTMLElement.textContent = ('0' + currentSeconds).slice(-2);
+  }
+  progressBar.style.width = (currentSeconds / 60 * 100) + '%';
+  progressBar.style.backgroundColor = '#' + hexStringSeconds + '1';
 }
-//this is setting the interval at which the clock will update (10 times a second so there is not a second delay before the clock starts) and then displaying the information on the webpage
+
+
+function mouseOverHandler (){
+  isHovering = true;
+}
+
+function mouseOffHandler (){
+  isHovering = false;
+}
+
 window.setInterval(updateClock, 100);
-window.setInterval(hexConversion, 100);
-//
 
-function updateTimebar(){
-
-//this is telling javascript where to find the container, then we are grabbing the seconds from currentTime, dividing the second by the number of seconds in a minute and then multiplyig by 100 to get a percentage
-  timebarHTMLElement.style.width = (currentTime.getSeconds()/60 * 100)+ '%';
-
-}
-
-
-function hexConversion(){
-  var hexStringHours = ("0" + currentTime.getHours()).slice(-2).toString(16);
-  var hexStringMinutes = ("0" + currentTime.getMinutes()).slice(-2).toString(16);
-  var hexStringSeconds = ("0" + currentTime.getSeconds()).slice(-2).toString(16);
-  var updateColors = ("#" + hexStringHours + hexStringMinutes + hexStringSeconds);
-  backgroundHTMLElement.style.backgroundColor = updateColors;
-  timeHTMLElement.addEventListener("mouseover", hexConversion);
-}
-
-
+clock.addEventListener('mouseover', mouseOverHandler);
+clock.addEventListener('mouseout', mouseOffHandler);
 
 }());

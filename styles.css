@@ -1,47 +1,47 @@
 body {
-  background-color: limegreen;
-  text-align: center;
-  vertical-align: middle;
-  font-size: 30px;
-  font-family: fantasy;
+  font-family: monospace;
+  background-image: url("http://img04.deviantart.net/e7b2/i/2012/175/b/3/clock_of_the_time_dragon__background__by_surrenderwhite-d54pcpg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-
-
-h1, .container {
-  width: 700px;
-  margin: auto;
-
-}
-
-.time-and-hex {
-  width: 600px;
+.container {
   height: 400px;
-  vertical-align: middle;
-  display: inline-block;
-  margin-top: 50px;
-  padding-top: 150px;
-}
-
-.time {
-  width: 200px;
-  margin: 20px auto;
-}
-
-
-.hours::after, .minutes::after {
-  content: ":";
-}
-
-.timebar-container {
   width: 600px;
+  text-align: center;
+  margin: 125px auto;
+  border: 15px solid;
+  border-radius: 50%;
 }
 
-.timebar {
+h1 {
+  text-align: center;
+  color: white;
+  font-size: 50px;
+  text-decoration: underline;
+}
+
+.hours, .minutes, .seconds {
+  display: inline-block;
+  margin-top: 125px;
+}
+
+#clock {
+  font-size: 50px;
+  color: white;
+  margin: auto;
+}
+
+#progress {
+  height: 10px;
   width: 0;
-  height: 3px;
-  background-color: white;
-  margin:auto;
+  margin: auto;
+  transition: width 1s linear;
+  border: 2px solid black;
+  border-radius: 40%;
+}
 
 
+.hours:after, .minutes:after {
+  content: ":";
 }
